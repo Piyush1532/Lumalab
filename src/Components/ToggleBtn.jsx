@@ -28,7 +28,7 @@ const ToggleBtn = ({ theme, setTheme }) => {
 
   return (
     <>
-      <button>
+      <button className="cursor-pointer">
         {theme === "dark" ? (
           <img
             src={assets.sun_icon}

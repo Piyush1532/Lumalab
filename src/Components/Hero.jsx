@@ -3,7 +3,7 @@ import assets from '../assets/assets'
 
 const Hero = () => {
   return (
-    <div id='hero' className='flex flex-col items-center gap-6 py-24 px-4  sm:px-12 lg:px-24 xl:px-40 text-center w-full overflow-hidden text-gray-700 dark:text-white min-h-[calc(100vh-64px)]  dark:bg-[#4c4c4c] transition-colors duration-300'>
+    <div id='hero' className='flex flex-col items-center gap-6 py-24 px-4  sm:px-12 lg:px-24 xl:px-40 text-center w-full overflow-hidden text-gray-700 dark:text-white min-h-[calc(100vh-64px)] '>
       
 <div className="inline-flex items-center gap-2 border border-gray-300 p-1.5 pr-4 rounded-full">
     <img src={assets.group_profile} alt="" />
@@ -16,7 +16,7 @@ const Hero = () => {
 
 <div className='relative'>
     <img src={assets.hero_img} alt="" className='w-full max-w-6xl' />
-    <img src={assets.bgImage1} alt="" className='absolute -top-90 -right-190 sm:-top-10 sm:right-70 -z-1 dark:hidden' />
+    <img src={assets.bgImage1} alt="" className='absolute -top-90 -right-100 sm:-top-10 sm:right-70 -z-1 dark:hidden' />
 </div>
 
     </div>
