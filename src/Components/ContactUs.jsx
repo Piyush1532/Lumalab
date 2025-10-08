@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Title from './Title'
 import assets from '../assets/assets'
+import toast from 'react-hot-toast';
 
 const Contactus = () => {
 
@@ -9,6 +10,9 @@ const Contactus = () => {
     email: '',
     message: '',
   });
+
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
     const [isValid, setIsValid] = useState(false);
 
@@ -28,16 +32,16 @@ const Contactus = () => {
   };
 
 
-  const onSubmit = async (evt) => {
-    evt.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
     if (!isValid) return;
 
 
-    const web3FormData = new FormData(evt.target);
-    web3FormData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+    const web3FormData = new FormData(event.currentTarget);
+    web3FormData.append("access_key", `${apiKey}`);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch(`${apiUrl}`, {
         method: "POST",
         body: web3FormData
       });
@@ -45,16 +49,15 @@ const Contactus = () => {
       const data = await response.json();
 
       if (data.success) {
-        ("Form Submitted Successfully");
-        setFormData({ name: '', email: '', message: '' }); // reset controlled inputs
-        evt.target.reset()
+        toast.success("Thank you for your Submission ");
+        event.target.reset()
       } else {
         console.log("Error", data);
-        setResult(data.message || "Something went wrong");
+        toast.error(data.message || "Something went wrong");
       }
     } catch (err) {
       console.log(err);
-      setResult("Network error. Please try again.");
+      toast.error("Network error. Please try again.");
     }
   };
 
@@ -63,7 +66,7 @@ const Contactus = () => {
     <div id='contact' className='flex flex-col items-center gap-7 px-4 sm:px-12 lg:px-24 xl:px-40 pt-30 text-gray-700 dark:text-white'>
         <Title title="Reach out to us" desc="From strategy to execution ,we craft digit solution that move your business forward. "/>
        
-       <form className='grid sm:grid-cols-2 gap-3 sm:gap-5 max-w-2xl w-full' onClick={onSubmit}>
+       <form className='grid sm:grid-cols-2 gap-3 sm:gap-5 max-w-2xl w-full' onSubmit={onSubmit}>
 
 <div>
     <p className="mb-2 text-sm font-medium">Your Name</p>
