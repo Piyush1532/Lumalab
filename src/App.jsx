@@ -20,24 +20,24 @@ const App = () => {
   const dotRef = useRef(null);
   const outlineRef = useRef(null);
 
-  const customPointer = useRef({ x: 0, y: 0 });
+  const mouse = useRef({ x: 0, y: 0 });
   const position = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (evt) => {
-      customPointer.current.x = evt.clientX;
-      customPointer.current.y = evt.clientY;
+      mouse.current.x = evt.clientX;
+      mouse.current.y = evt.clientY;
     };
 
     document.addEventListener('mousemove', handleMouseMove);
 
     const animate = () => {
-      position.current.x += (customPointer.current.x - position.current.x) * 0.1;
-      position.current.y += (customPointer.current.y - position.current.y) * 0.1;
+      position.current.x += (mouse.current.x - position.current.x) * 0.1;
+      position.current.y += (mouse.current.y - position.current.y) * 0.1;
 
       if (dotRef.current && outlineRef.current) {
-        dotRef.current.style.transform = `translate3d(${position.current.x - 6}px, ${position.current.y -  6}px, 0)`;
-        outlineRef.current.style.transform = `translate3d(${position.current.x -20}px, ${position.current.y -20}px, 0)`;
+        dotRef.current.style.transform = `translate3d(${mouse.current.x - 6}px, ${mouse.current.y -  6}px, 0)`;
+        outlineRef.current.style.transform = `translate3d(${position.current.x - 20}px, ${position.current.y - 20}px, 0)`;
       }
 
       requestAnimationFrame(animate);
@@ -78,7 +78,7 @@ const App = () => {
    <div
         ref={outlineRef}
         className="fixed top-0 left-0 h-10 w-10 rounded-full border border-[#6200de] pointer-events-none z-[9999]"
-
+         style={{transition:"transform 0.1s  ease-out"}}
       />
       <div
         ref={dotRef}
